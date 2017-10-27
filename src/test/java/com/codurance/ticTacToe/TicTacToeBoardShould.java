@@ -7,6 +7,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class TicTacToeBoardShould {
+    
     @Test
     public void
     result_in_win_for_player_x_on_first_row() {
@@ -17,6 +18,10 @@ public class TicTacToeBoardShould {
                 new Position(1, 0),
                 new Position(0, 1),
                 new Position(1, 1),
+                new Position(2, 0),
+                new Position(2, 1),
+                new Position(1, 2),
+                new Position(2, 2),
                 new Position(0, 2)
         ));
 
