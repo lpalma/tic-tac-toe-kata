@@ -13,7 +13,7 @@ public class Board {
         return new Board(new HashMap<>());
     }
 
-    public Board play(Player player, Square square) {
+    public Board play(Player player, Square square) throws InvalidMoveException {
         throw new UnsupportedOperationException();
     }
 

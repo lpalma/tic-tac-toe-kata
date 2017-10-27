@@ -19,7 +19,7 @@ public class PlayerXTurnShould {
 
     @Test
     public void
-    pass_turn_to_player_O_after_play() {
+    pass_turn_to_player_O_after_play() throws InvalidMoveException {
         PlayerXTurn playerXTurn = new PlayerXTurn(board);
 
         given(board.play(X, TOP_LEFT)).willReturn(board);
@@ -27,5 +27,15 @@ public class PlayerXTurnShould {
         PlayerOTurn nextTurn = playerXTurn.playOn(TOP_LEFT);
 
         assertThat(nextTurn, equalTo(new PlayerOTurn(board)));
+    }
+
+    @Test(expected = InvalidMoveException.class)
+    public void
+    not_allow_multiple_plays_on_same_square() throws InvalidMoveException {
+        PlayerXTurn playerXTurn = new PlayerXTurn(board);
+
+        given(board.play(X, TOP_LEFT)).willThrow(new InvalidMoveException());
+
+        playerXTurn.playOn(TOP_LEFT);
     }
 }

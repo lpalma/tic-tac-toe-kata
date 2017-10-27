@@ -9,7 +9,7 @@ public class PlayerXTurn {
         this.board = board;
     }
 
-    public PlayerOTurn playOn(Square square) {
+    public PlayerOTurn playOn(Square square) throws InvalidMoveException {
         return new PlayerOTurn(board.play(X, square));
     }
 
