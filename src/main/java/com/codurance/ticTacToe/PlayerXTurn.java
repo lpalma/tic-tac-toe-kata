@@ -2,14 +2,14 @@ package com.codurance.ticTacToe;
 
 import static com.codurance.ticTacToe.Player.X;
 
-public class PlayerXTurn {
+public class PlayerXTurn implements GameState {
     private Board board;
 
     public PlayerXTurn(Board board) {
         this.board = board;
     }
 
-    public PlayerOTurn playOn(Square square) throws InvalidMoveException {
+    public GameState playOn(Square square) throws InvalidMoveException {
         return new PlayerOTurn(board.play(X, square));
     }
 

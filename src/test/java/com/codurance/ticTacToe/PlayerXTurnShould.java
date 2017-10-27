@@ -24,7 +24,7 @@ public class PlayerXTurnShould {
 
         given(board.play(X, TOP_LEFT)).willReturn(board);
 
-        PlayerOTurn nextTurn = playerXTurn.playOn(TOP_LEFT);
+        GameState nextTurn = playerXTurn.playOn(TOP_LEFT);
 
         assertThat(nextTurn, equalTo(new PlayerOTurn(board)));
     }

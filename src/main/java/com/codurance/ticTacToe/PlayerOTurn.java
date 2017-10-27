@@ -1,10 +1,14 @@
 package com.codurance.ticTacToe;
 
-public class PlayerOTurn {
+public class PlayerOTurn implements GameState {
     private Board board;
 
     public PlayerOTurn(Board board) {
         this.board = board;
+    }
+
+    public GameState playOn(Square square) throws InvalidMoveException {
+        throw new UnsupportedOperationException();
     }
 
     @Override
