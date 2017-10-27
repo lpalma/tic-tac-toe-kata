@@ -1,5 +1,5 @@
 package com.codurance.ticTacToe;
 
 public enum Player {
-    X
+    O, X
 }

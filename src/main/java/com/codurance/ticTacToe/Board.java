@@ -5,16 +5,27 @@ import java.util.HashMap;
 public class Board {
     private HashMap<Player, Square> plays;
 
-    public Board(HashMap<Player, Square> playerSquareHashMap) {
-        plays = playerSquareHashMap;
-    }
-
     public static Board empty() {
         return new Board(new HashMap<>());
     }
 
     public Board play(Player player, Square square) throws InvalidMoveException {
-        throw new UnsupportedOperationException();
+        if (this.plays.containsValue(square)) {
+            throw new InvalidMoveException();
+        }
+
+        return new Board(mergePlays(player, square));
+    }
+
+    private HashMap<Player, Square> mergePlays(Player player, Square square) {
+        HashMap<Player, Square> newBoard = new HashMap<>(plays);
+        newBoard.put(player, square);
+
+        return newBoard;
+    }
+
+    private Board(HashMap<Player, Square> playerSquareHashMap) {
+        plays = playerSquareHashMap;
     }
 
     @Override
