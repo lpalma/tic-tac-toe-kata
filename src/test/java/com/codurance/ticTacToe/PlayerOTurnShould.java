@@ -1,5 +1,6 @@
 package com.codurance.ticTacToe;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -17,11 +18,16 @@ public class PlayerOTurnShould {
     @Mock
     private Board board;
 
+    private PlayerOTurn playerOTurn;
+
+    @Before
+    public void setUp() {
+        playerOTurn = new PlayerOTurn(board);
+    }
+
     @Test
     public void
     pass_turn_to_player_X_after_play() throws InvalidMoveException {
-        PlayerOTurn playerOTurn = new PlayerOTurn(board);
-
         given(board.play(O, TOP_LEFT)).willReturn(board);
 
         GameState nextTurn = playerOTurn.playOn(TOP_LEFT);
@@ -32,8 +38,6 @@ public class PlayerOTurnShould {
     @Test(expected = InvalidMoveException.class)
     public void
     not_allow_multiple_plays_on_same_square() throws InvalidMoveException {
-        PlayerOTurn playerOTurn = new PlayerOTurn(board);
-
         given(board.play(O, TOP_LEFT)).willThrow(new InvalidMoveException());
 
         playerOTurn.playOn(TOP_LEFT);
