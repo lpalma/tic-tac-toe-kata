@@ -1,10 +1,16 @@
 package com.codurance.ticTacToe;
 
+import static com.codurance.ticTacToe.Player.X;
+
 public class PlayerXTurn {
     private Board board;
 
     public PlayerXTurn(Board board) {
         this.board = board;
+    }
+
+    public PlayerOTurn playOn(Square square) {
+        return new PlayerOTurn(board.play(X, square));
     }
 
     @Override

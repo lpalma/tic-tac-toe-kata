@@ -13,6 +13,10 @@ public class Board {
         return new Board(new HashMap<>());
     }
 
+    public Board play(Player player, Square square) {
+        throw new UnsupportedOperationException();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
