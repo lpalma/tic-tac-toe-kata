@@ -1,20 +1,25 @@
 package com.codurance.ticTacToe;
 
 import java.util.HashMap;
+import java.util.Optional;
 
-public class Board {
+public class Board implements NextBoard {
     private HashMap<Player, Square> plays;
 
     public static Board empty() {
         return new Board(new HashMap<>());
     }
 
-    public Board play(Player player, Square square) throws InvalidMoveException {
+    public NextBoard play(Player player, Square square) throws InvalidMoveException {
         if (this.plays.containsValue(square)) {
             throw new InvalidMoveException();
         }
 
         return new Board(mergePlays(player, square));
+    }
+
+    public Optional<Result> result() {
+        throw new UnsupportedOperationException();
     }
 
     private HashMap<Player, Square> mergePlays(Player player, Square square) {

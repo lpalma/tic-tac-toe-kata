@@ -1,4 +1,5 @@
 package com.codurance.ticTacToe;
 
-public class XWon {
+public enum Result {
+    X_WON
 }

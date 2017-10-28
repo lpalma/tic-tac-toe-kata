@@ -1,16 +1,29 @@
 package com.codurance.ticTacToe;
 
+import java.util.Optional;
+
 import static com.codurance.ticTacToe.Player.X;
+import static com.codurance.ticTacToe.Result.X_WON;
 
 public class PlayerXTurn implements GameState {
-    private Board board;
+    private NextBoard board;
 
-    public PlayerXTurn(Board board) {
+    public PlayerXTurn(NextBoard board) {
         this.board = board;
     }
 
-    public GameState playOn(Square square) throws InvalidMoveException {
-        return new PlayerOTurn(board.play(X, square));
+    public GameState playOn(Square square) throws InvalidMoveException, GameFinishedException {
+        NextBoard nextBoard = board.play(X, square);
+
+        if (nextBoard.result().isPresent()) {
+            return new EndGame(X_WON);
+        }
+
+        return new PlayerOTurn(nextBoard);
+    }
+
+    public Optional<Result> result() {
+        throw new UnsupportedOperationException();
     }
 
     @Override

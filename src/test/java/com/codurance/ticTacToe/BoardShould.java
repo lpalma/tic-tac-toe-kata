@@ -10,7 +10,7 @@ public class BoardShould {
 
     @Test(expected = InvalidMoveException.class)
     public void
-    not_allow_multiple_plays_on_a_square() throws InvalidMoveException {
+    not_allow_multiple_plays_on_a_square() throws InvalidMoveException, GameFinishedException {
         Board.empty()
                 .play(X, TOP_LEFT)
                 .play(O, TOP_LEFT);
