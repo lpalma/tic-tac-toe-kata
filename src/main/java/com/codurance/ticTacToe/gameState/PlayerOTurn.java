@@ -9,6 +9,7 @@ import com.codurance.ticTacToe.board.NextBoard;
 import java.util.Optional;
 
 import static com.codurance.ticTacToe.Player.O;
+import static java.util.Optional.empty;
 
 public class PlayerOTurn implements GameState {
     private NextBoard board;
@@ -22,7 +23,7 @@ public class PlayerOTurn implements GameState {
     }
 
     public Optional<Result> result() {
-        throw new UnsupportedOperationException();
+        return empty();
     }
 
     @Override

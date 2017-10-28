@@ -3,11 +3,15 @@ package com.codurance.ticTacToe.gameState;
 import com.codurance.ticTacToe.GameFinishedException;
 import com.codurance.ticTacToe.InvalidMoveException;
 import com.codurance.ticTacToe.board.Board;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsEqual;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.Optional;
 
 import static com.codurance.ticTacToe.Player.O;
 import static com.codurance.ticTacToe.Square.TOP_LEFT;
@@ -45,4 +49,11 @@ public class PlayerOTurnShould {
 
         playerOTurn.playOn(TOP_LEFT);
     }
+
+    @Test
+    public void
+    not_have_a_result() {
+        MatcherAssert.assertThat(playerOTurn.result(), IsEqual.equalTo(Optional.empty()));
+    }
+
 }
