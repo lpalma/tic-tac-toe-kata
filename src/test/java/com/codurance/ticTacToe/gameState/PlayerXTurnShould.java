@@ -1,5 +1,9 @@
-package com.codurance.ticTacToe;
+package com.codurance.ticTacToe.gameState;
 
+import com.codurance.ticTacToe.GameFinishedException;
+import com.codurance.ticTacToe.InvalidMoveException;
+import com.codurance.ticTacToe.board.Board;
+import com.codurance.ticTacToe.board.EndBoard;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

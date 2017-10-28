@@ -1,5 +1,9 @@
 package com.codurance.ticTacToe;
 
+import com.codurance.ticTacToe.board.Board;
+import com.codurance.ticTacToe.gameState.EndGame;
+import com.codurance.ticTacToe.gameState.GameState;
+import com.codurance.ticTacToe.gameState.PlayerXTurn;
 import org.junit.Test;
 
 import static com.codurance.ticTacToe.Result.X_WON;

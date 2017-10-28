@@ -1,4 +1,6 @@
-package com.codurance.ticTacToe;
+package com.codurance.ticTacToe.board;
+
+import com.codurance.ticTacToe.*;
 
 import java.util.Optional;
 

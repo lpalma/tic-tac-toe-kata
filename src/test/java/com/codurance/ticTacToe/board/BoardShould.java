@@ -1,5 +1,7 @@
-package com.codurance.ticTacToe;
+package com.codurance.ticTacToe.board;
 
+import com.codurance.ticTacToe.GameFinishedException;
+import com.codurance.ticTacToe.InvalidMoveException;
 import org.junit.Test;
 
 import java.util.Optional;

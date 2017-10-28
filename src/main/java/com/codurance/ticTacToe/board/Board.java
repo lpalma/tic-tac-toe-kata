@@ -1,4 +1,9 @@
-package com.codurance.ticTacToe;
+package com.codurance.ticTacToe.board;
+
+import com.codurance.ticTacToe.InvalidMoveException;
+import com.codurance.ticTacToe.Player;
+import com.codurance.ticTacToe.Result;
+import com.codurance.ticTacToe.Square;
 
 import java.util.HashMap;
 import java.util.Optional;

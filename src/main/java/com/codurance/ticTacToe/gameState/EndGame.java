@@ -1,4 +1,9 @@
-package com.codurance.ticTacToe;
+package com.codurance.ticTacToe.gameState;
+
+import com.codurance.ticTacToe.GameFinishedException;
+import com.codurance.ticTacToe.InvalidMoveException;
+import com.codurance.ticTacToe.Result;
+import com.codurance.ticTacToe.Square;
 
 import java.util.Optional;
 

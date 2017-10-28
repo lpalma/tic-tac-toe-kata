@@ -1,5 +1,8 @@
-package com.codurance.ticTacToe;
+package com.codurance.ticTacToe.gameState;
 
+import com.codurance.ticTacToe.GameFinishedException;
+import com.codurance.ticTacToe.InvalidMoveException;
+import com.codurance.ticTacToe.board.Board;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,7 +12,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import static com.codurance.ticTacToe.Player.O;
 import static com.codurance.ticTacToe.Square.TOP_LEFT;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(MockitoJUnitRunner.class)
