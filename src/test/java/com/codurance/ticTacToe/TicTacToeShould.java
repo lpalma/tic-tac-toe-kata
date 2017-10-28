@@ -1,10 +1,11 @@
 package com.codurance.ticTacToe;
 
 import com.codurance.ticTacToe.board.Board;
-import com.codurance.ticTacToe.gameState.EndGame;
 import com.codurance.ticTacToe.gameState.GameState;
 import com.codurance.ticTacToe.gameState.PlayerXTurn;
 import org.junit.Test;
+
+import java.util.Optional;
 
 import static com.codurance.ticTacToe.Result.X_WON;
 import static com.codurance.ticTacToe.Square.*;
@@ -15,20 +16,20 @@ public class TicTacToeShould {
 
     @Test
     public void
-    start_empty_board_with_player_X_turn() {
+    start_empty_board_on_X_turn() {
        assertThat(TicTacToe.newGame(), equalTo(new PlayerXTurn(Board.empty())));
     }
 
     @Test
     public void
-    result_in_victory_to_player_X() throws InvalidMoveException, GameFinishedException {
-        GameState result = TicTacToe.newGame()
+    result_in_victory_to_X_when_X_wins() throws InvalidMoveException, GameFinishedException {
+        GameState game = TicTacToe.newGame()
                 .playOn(TOP_LEFT)
                 .playOn(MIDDLE_LEFT)
                 .playOn(TOP_CENTER)
                 .playOn(MIDDLE_CENTER)
                 .playOn(TOP_RIGHT);
 
-        assertThat(result, equalTo(new EndGame(X_WON)));
+        assertThat(game.result(), equalTo(Optional.of(X_WON)));
     }
 }
