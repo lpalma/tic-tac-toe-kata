@@ -19,7 +19,7 @@ public class Board implements NextBoard {
     }
 
     public Optional<Result> result() {
-        throw new UnsupportedOperationException();
+        return Optional.empty();
     }
 
     private HashMap<Player, Square> mergePlays(Player player, Square square) {
