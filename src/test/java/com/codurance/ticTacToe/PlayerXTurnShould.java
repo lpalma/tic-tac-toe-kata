@@ -56,4 +56,10 @@ public class PlayerXTurnShould {
 
         assertThat(game.result(), equalTo(Optional.of(X_WON)));
     }
+
+    @Test
+    public void
+    not_have_a_result() {
+        assertThat(playerXTurn.result(), equalTo(empty()));
+    }
 }
