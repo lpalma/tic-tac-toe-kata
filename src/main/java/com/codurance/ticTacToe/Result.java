@@ -1,5 +1,5 @@
 package com.codurance.ticTacToe;
 
 public enum Result {
-    X_WON
+    O_WON, X_WON
 }

@@ -7,9 +7,7 @@ import com.codurance.ticTacToe.Square;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.Map.Entry;
 
-import static com.codurance.ticTacToe.Player.X;
 import static com.codurance.ticTacToe.Result.X_WON;
 import static com.codurance.ticTacToe.Square.*;
 import static java.util.Arrays.asList;

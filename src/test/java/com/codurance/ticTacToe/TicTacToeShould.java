@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.util.Optional;
 
+import static com.codurance.ticTacToe.Result.O_WON;
 import static com.codurance.ticTacToe.Result.X_WON;
 import static com.codurance.ticTacToe.Square.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -31,5 +32,19 @@ public class TicTacToeShould {
                 .playOn(TOP_RIGHT);
 
         assertThat(game.result(), equalTo(Optional.of(X_WON)));
+    }
+
+    @Test
+    public void
+    result_in_victory_to_O_when_O_wins() throws InvalidMoveException, GameFinishedException {
+        GameState game = TicTacToe.newGame()
+                .playOn(TOP_LEFT)
+                .playOn(MIDDLE_LEFT)
+                .playOn(TOP_CENTER)
+                .playOn(MIDDLE_CENTER)
+                .playOn(BOTTOM_RIGHT)
+                .playOn(MIDDLE_RIGHT);
+
+        assertThat(game.result(), equalTo(Optional.of(O_WON)));
     }
 }
