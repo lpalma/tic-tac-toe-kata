@@ -47,12 +47,6 @@ public class TicTacToeShould {
     }
 
     @Test
-    public void
-    start_empty_board_on_X_turn() {
-       assertThat(TicTacToe.newGame(), equalTo(new PlayerXTurn(Board.empty())));
-    }
-
-    @Test
     @Parameters(method = "xWins")
     public void
     result_in_victory_to_X_when_X_wins(Square[] squares) throws InvalidMoveException, GameFinishedException {

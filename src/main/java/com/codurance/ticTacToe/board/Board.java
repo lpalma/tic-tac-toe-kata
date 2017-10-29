@@ -70,19 +70,4 @@ public class Board implements NextBoard {
     private Board(HashMap<Player, List<Square>> playerSquareHashMap) {
         plays = playerSquareHashMap;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Board board = (Board) o;
-
-        return plays != null ? plays.equals(board.plays) : board.plays == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return plays != null ? plays.hashCode() : 0;
-    }
 }
