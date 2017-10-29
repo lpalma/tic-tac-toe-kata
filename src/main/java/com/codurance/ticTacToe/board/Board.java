@@ -9,22 +9,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.codurance.ticTacToe.Result.X_WON;
-import static com.codurance.ticTacToe.Square.*;
-import static java.util.Arrays.asList;
 
 public class Board implements NextBoard {
     private HashMap<Player, List<Square>> plays;
-
-    private List<List<Square>> winningRows = asList(
-            asList(TOP_LEFT, TOP_CENTER, TOP_RIGHT),
-            asList(MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT),
-            asList(BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT),
-            asList(TOP_LEFT, MIDDLE_LEFT, BOTTOM_LEFT),
-            asList(TOP_CENTER, MIDDLE_CENTER, BOTTOM_CENTER),
-            asList(TOP_RIGHT, MIDDLE_RIGHT, BOTTOM_RIGHT),
-            asList(TOP_LEFT, MIDDLE_CENTER, BOTTOM_RIGHT),
-            asList(TOP_RIGHT, MIDDLE_CENTER, BOTTOM_LEFT)
-    );
 
     public static Board empty() {
         return new Board(new HashMap<>());
@@ -35,25 +22,28 @@ public class Board implements NextBoard {
             throw new InvalidMoveException();
         }
 
-        List<Square> playerSquares = playsFrom(player, square);
+        return nextBoard(player, square);
+    }
 
-        Optional<List<Square>> winningRow = winningRows.stream()
-                .filter(playerSquares::containsAll)
-                .findFirst();
+    private NextBoard nextBoard(Player player, Square square) {
+        List<Square> playerSquares = playsFrom(player);
+        playerSquares.add(square);
 
-        if (winningRow.isPresent()) {
+        if (winningRowFor(playerSquares).isPresent()) {
             return new EndBoard(X_WON);
         }
 
         return new Board(mergePlays(player, playerSquares));
     }
 
-    private List<Square> playsFrom(Player player, Square square) {
-        List<Square> squares = plays.getOrDefault(player, new ArrayList<>());
+    private Optional<WinningRow> winningRowFor(List<Square> playerSquares) {
+        return Arrays.stream(WinningRow.values())
+                .filter(row -> playerSquares.containsAll(row.squares()))
+                .findFirst();
+    }
 
-        squares.add(square);
-
-        return squares;
+    private List<Square> playsFrom(Player player) {
+        return plays.getOrDefault(player, new ArrayList<>());
     }
 
     public Optional<Result> result() {
