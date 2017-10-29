@@ -5,18 +5,18 @@ import com.codurance.ticTacToe.Player;
 import com.codurance.ticTacToe.Result;
 import com.codurance.ticTacToe.Square;
 
-import java.util.HashMap;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Board implements NextBoard {
-    private HashMap<Player, Square> plays;
+    private HashMap<Player, List<Square>> plays;
 
     public static Board empty() {
         return new Board(new HashMap<>());
     }
 
     public NextBoard play(Player player, Square square) throws InvalidMoveException {
-        if (this.plays.containsValue(square)) {
+        if (squareNotAvailable(square)) {
             throw new InvalidMoveException();
         }
 
@@ -27,14 +27,26 @@ public class Board implements NextBoard {
         return Optional.empty();
     }
 
-    private HashMap<Player, Square> mergePlays(Player player, Square square) {
-        HashMap<Player, Square> newBoard = new HashMap<>(plays);
-        newBoard.put(player, square);
+    private HashMap<Player, List<Square>> mergePlays(Player player, Square square) {
+        HashMap<Player, List<Square>> newBoard = new HashMap<>(plays);
+        List<Square> squares = newBoard.getOrDefault(player, new ArrayList<>());
+
+        squares.add(square);
+        newBoard.put(player, squares);
 
         return newBoard;
     }
 
-    private Board(HashMap<Player, Square> playerSquareHashMap) {
+    private boolean squareNotAvailable(Square square) {
+        List<Square> playedSquares = plays.values()
+                .stream()
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+
+        return playedSquares.contains(square);
+    }
+
+    private Board(HashMap<Player, List<Square>> playerSquareHashMap) {
         plays = playerSquareHashMap;
     }
 
