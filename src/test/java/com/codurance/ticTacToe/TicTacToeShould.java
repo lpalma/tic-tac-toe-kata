@@ -33,6 +33,19 @@ public class TicTacToeShould {
         );
     }
 
+    private Object oWins() {
+        return asList(
+                asList(MIDDLE_LEFT, TOP_LEFT, MIDDLE_CENTER, TOP_CENTER, BOTTOM_RIGHT, TOP_RIGHT),
+                asList(TOP_LEFT, MIDDLE_LEFT, TOP_CENTER, MIDDLE_CENTER, BOTTOM_LEFT, MIDDLE_RIGHT),
+                asList(TOP_LEFT, BOTTOM_LEFT, TOP_CENTER, BOTTOM_CENTER, MIDDLE_LEFT, BOTTOM_RIGHT),
+                asList(TOP_CENTER, TOP_LEFT, MIDDLE_CENTER, MIDDLE_LEFT, TOP_RIGHT, BOTTOM_LEFT),
+                asList(TOP_LEFT, TOP_CENTER, MIDDLE_LEFT, MIDDLE_CENTER, BOTTOM_RIGHT, BOTTOM_CENTER),
+                asList(TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_RIGHT, BOTTOM_CENTER, BOTTOM_RIGHT),
+                asList(TOP_CENTER, TOP_LEFT, MIDDLE_LEFT, MIDDLE_CENTER, BOTTOM_CENTER, BOTTOM_RIGHT),
+                asList(TOP_LEFT, TOP_RIGHT, TOP_CENTER, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT)
+        );
+    }
+
     @Test
     public void
     start_empty_board_on_X_turn() {
@@ -54,15 +67,16 @@ public class TicTacToeShould {
     }
 
     @Test
+    @Parameters(method = "oWins")
     public void
-    result_in_victory_to_O_when_O_wins() throws InvalidMoveException, GameFinishedException {
+    result_in_victory_to_O_when_O_wins(Square[] squares) throws InvalidMoveException, GameFinishedException {
         GameState game = TicTacToe.newGame()
-                .playOn(TOP_LEFT)
-                .playOn(MIDDLE_LEFT)
-                .playOn(TOP_CENTER)
-                .playOn(MIDDLE_CENTER)
-                .playOn(BOTTOM_RIGHT)
-                .playOn(MIDDLE_RIGHT);
+                .playOn(squares[0])
+                .playOn(squares[1])
+                .playOn(squares[2])
+                .playOn(squares[3])
+                .playOn(squares[4])
+                .playOn(squares[5]);
 
         assertThat(game.result(), equalTo(Optional.of(O_WON)));
     }
