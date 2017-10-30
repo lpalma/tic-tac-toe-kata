@@ -9,7 +9,6 @@ import com.codurance.ticTacToe.board.NextBoard;
 import java.util.Optional;
 
 import static com.codurance.ticTacToe.Player.X;
-import static com.codurance.ticTacToe.Result.X_WON;
 import static java.util.Optional.empty;
 
 public class PlayerXTurn implements GameState {
@@ -21,12 +20,11 @@ public class PlayerXTurn implements GameState {
 
     public GameState playOn(Square square) throws InvalidMoveException, GameFinishedException {
         NextBoard nextBoard = board.play(X, square);
+        Optional<Result> result = nextBoard.result();
 
-        if (nextBoard.result().isPresent()) {
-            return new EndGame(X_WON);
-        }
-
-        return new PlayerOTurn(nextBoard);
+        return result.isPresent()
+            ? new EndGame(result.get())
+            : new PlayerOTurn(nextBoard);
     }
 
     public Optional<Result> result() {

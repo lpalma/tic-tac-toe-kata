@@ -13,6 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.Optional;
 
 import static com.codurance.ticTacToe.Player.X;
+import static com.codurance.ticTacToe.Result.DRAW;
 import static com.codurance.ticTacToe.Result.X_WON;
 import static com.codurance.ticTacToe.Square.TOP_LEFT;
 import static java.util.Optional.empty;
@@ -65,5 +66,15 @@ public class PlayerXTurnShould {
     public void
     not_have_a_result() {
         assertThat(playerXTurn.result(), equalTo(empty()));
+    }
+
+    @Test
+    public void
+    proceed_to_draw_if_game_finishes_with_no_winner() throws InvalidMoveException, GameFinishedException {
+        given(board.play(X, TOP_LEFT)).willReturn(new EndBoard(DRAW));
+
+        GameState game = playerXTurn.playOn(TOP_LEFT);
+
+        assertThat(game.result(), equalTo(Optional.of(DRAW)));
     }
 }

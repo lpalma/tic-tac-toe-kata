@@ -8,10 +8,13 @@ import com.codurance.ticTacToe.Square;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.codurance.ticTacToe.Result.DRAW;
 import static com.codurance.ticTacToe.Result.X_WON;
 
 public class Board implements NextBoard {
-    private HashMap<Player, List<Square>> plays;
+    public static final int BOARD_SIZE = 9;
+
+    private HashMap<Player, List<Square>> board;
 
     public static Board empty() {
         return new Board(new HashMap<>());
@@ -25,6 +28,10 @@ public class Board implements NextBoard {
         return nextBoard(player, square);
     }
 
+    public Optional<Result> result() {
+        return Optional.empty();
+    }
+
     private NextBoard nextBoard(Player player, Square square) {
         List<Square> playerSquares = playsFrom(player);
         playerSquares.add(square);
@@ -33,7 +40,18 @@ public class Board implements NextBoard {
             return new EndBoard(X_WON);
         }
 
+        if (isBoardFull(square)) {
+            return new EndBoard(DRAW);
+        }
+
         return new Board(mergePlays(player, playerSquares));
+    }
+
+    private boolean isBoardFull(Square currentSquare) {
+        List<Square> playedSquares = playedSquares();
+        playedSquares.add(currentSquare);
+
+        return playedSquares.size() == BOARD_SIZE;
     }
 
     private Optional<WinningRow> winningRowFor(List<Square> playerSquares) {
@@ -43,15 +61,13 @@ public class Board implements NextBoard {
     }
 
     private List<Square> playsFrom(Player player) {
-        return plays.getOrDefault(player, new ArrayList<>());
-    }
+        List<Square> plays = board.getOrDefault(player, new ArrayList<>());
 
-    public Optional<Result> result() {
-        return Optional.empty();
+        return new ArrayList<>(plays);
     }
 
     private HashMap<Player, List<Square>> mergePlays(Player player, List<Square> squares) {
-        HashMap<Player, List<Square>> newBoard = new HashMap<>(plays);
+        HashMap<Player, List<Square>> newBoard = new HashMap<>(board);
 
         newBoard.put(player, squares);
 
@@ -59,15 +75,17 @@ public class Board implements NextBoard {
     }
 
     private boolean squareNotAvailable(Square square) {
-        List<Square> playedSquares = plays.values()
-                .stream()
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList());
+        return playedSquares().contains(square);
+    }
 
-        return playedSquares.contains(square);
+    private List<Square> playedSquares() {
+        return board.values()
+                    .stream()
+                    .flatMap(Collection::stream)
+                    .collect(Collectors.toList());
     }
 
     private Board(HashMap<Player, List<Square>> playerSquareHashMap) {
-        plays = playerSquareHashMap;
+        board = playerSquareHashMap;
     }
 }

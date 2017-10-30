@@ -74,4 +74,21 @@ public class TicTacToeShould {
 
         assertThat(game.result(), equalTo(Optional.of(O_WON)));
     }
+
+    @Test
+    public void
+    result_in_draw_when_game_finishes_with_no_winner() throws InvalidMoveException, GameFinishedException {
+        GameState game = TicTacToe.newGame()
+                .playOn(TOP_LEFT)
+                .playOn(TOP_CENTER)
+                .playOn(MIDDLE_CENTER)
+                .playOn(TOP_RIGHT)
+                .playOn(MIDDLE_RIGHT)
+                .playOn(MIDDLE_LEFT)
+                .playOn(BOTTOM_LEFT)
+                .playOn(BOTTOM_RIGHT)
+                .playOn(BOTTOM_CENTER);
+
+        assertThat(game.result(), equalTo(Optional.of(Result.DRAW)));
+    }
 }

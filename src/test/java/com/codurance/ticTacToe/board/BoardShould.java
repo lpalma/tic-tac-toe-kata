@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import static com.codurance.ticTacToe.Player.O;
 import static com.codurance.ticTacToe.Player.X;
+import static com.codurance.ticTacToe.Result.DRAW;
 import static com.codurance.ticTacToe.Result.X_WON;
 import static com.codurance.ticTacToe.Square.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -42,5 +43,22 @@ public class BoardShould {
                 .play(X, TOP_RIGHT);
 
         assertThat(board.result(), equalTo(Optional.of(X_WON)));
+    }
+
+    @Test
+    public void
+    result_in_draw_if_game_ends_with_no_winner() throws InvalidMoveException, GameFinishedException {
+        NextBoard board = Board.empty()
+                .play(X, TOP_LEFT)
+                .play(O, TOP_CENTER)
+                .play(X, MIDDLE_CENTER)
+                .play(O, TOP_RIGHT)
+                .play(X, MIDDLE_RIGHT)
+                .play(O, MIDDLE_LEFT)
+                .play(X, BOTTOM_LEFT)
+                .play(O, BOTTOM_RIGHT)
+                .play(X, BOTTOM_CENTER);
+
+        assertThat(board.result(), equalTo(Optional.of(DRAW)));
     }
 }
